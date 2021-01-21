@@ -1,0 +1,9 @@
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\bin\Debug\QLBHCC.exe.config
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\bin\Debug\QLBHCC.exe
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\bin\Debug\QLBHCC.pdb
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.csprojAssemblyReference.cache
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.LoginForm.resources
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.Properties.Resources.resources
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.csproj.GenerateResource.cache
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.exe
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.pdb
