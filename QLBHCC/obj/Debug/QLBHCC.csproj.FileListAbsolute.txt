@@ -7,3 +7,4 @@ C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.Properties.Resources.resou
 C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.csproj.GenerateResource.cache
 C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.exe
 C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.pdb
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.QuanLyCayCanh.resources
