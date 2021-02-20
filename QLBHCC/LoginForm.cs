@@ -49,8 +49,13 @@ namespace QLBHCC
                 var reader = comm.ExecuteReader();
                 if (reader.HasRows)
                 {
+                    String id = "";
+                    while (reader.Read())
+                    {
+                        id = reader["idNhanVien"].ToString();
+                    };
                     this.Hide();
-                    QuanLyCayCanh qlcc = new QuanLyCayCanh(tbUsername.Text);
+                    QuanLyCayCanh qlcc = new QuanLyCayCanh(tbUsername.Text, id);
                     qlcc.Show();
                 }
                 else

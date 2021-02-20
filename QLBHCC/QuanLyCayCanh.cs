@@ -16,10 +16,11 @@ namespace QLBHCC
     public partial class QuanLyCayCanh : Form
     {
         private string connString = ConfigurationManager.ConnectionStrings["connectionString"].ToString();
-        public QuanLyCayCanh(string username)
+        String id;
+        public QuanLyCayCanh(string username, string id)
         {
-            MessageBox.Show(username);
             InitializeComponent();
+            this.id = id;
         }
 
         private void QuanLyCayCanh_Load(object sender, EventArgs e)
@@ -310,6 +311,42 @@ namespace QLBHCC
                     }
                 }
             }
+        }
+
+        private void tblBan_Click(object sender, EventArgs e)
+        {
+            QuanLyHoaDon qlhd = new QuanLyHoaDon(id);
+            this.Hide();
+            qlhd.Show();
+
+        }
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            if (tbFind.Text == "Nhập tên cây cần tìm..." || tbFind.Text == "")
+            {
+                load();
+            }
+            else
+            {
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+                    SqlCommand comm = new SqlCommand();
+                    comm.CommandText = "select idCayCanh as Id, sTenCayCanh as N'Tên cây',iLoaiCay as N'Loại cây', fGiaBan as N'Giá bán', fGiaNhap as N'Giá nhập', iSoLuong as N'Số lượng', sMoTa as N'Mô tả'  from tbl_caycanh where sTenCayCanh like '%" + tbFind.Text + "%'";
+                    comm.CommandType = CommandType.Text;
+                    comm.Connection = conn;
+                    SqlDataAdapter da = new SqlDataAdapter(comm);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                }
+            }
+        }
+
+        private void tbFind_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

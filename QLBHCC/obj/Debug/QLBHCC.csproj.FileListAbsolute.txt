@@ -8,3 +8,10 @@ C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.csproj.GenerateResource.ca
 C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.exe
 C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.pdb
 C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.QuanLyCayCanh.resources
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.QuanLyHoaDon.resources
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.ChiTietHoaDon.resources
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.ThongKe.resources
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\bin\Debug\itextsharp.dll
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\bin\Debug\itextsharp.xml
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.csproj.CopyComplete

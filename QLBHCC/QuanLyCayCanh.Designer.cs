@@ -68,6 +68,7 @@
             this.tbFind.Name = "tbFind";
             this.tbFind.Size = new System.Drawing.Size(172, 20);
             this.tbFind.TabIndex = 1;
+            this.tbFind.TextChanged += new System.EventHandler(this.tbFind_TextChanged);
             this.tbFind.Enter += new System.EventHandler(this.tbFind_Enter);
             this.tbFind.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbFind_KeyDown);
             this.tbFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFind_KeyPress);
@@ -111,6 +112,7 @@
             this.btnFind.TabIndex = 5;
             this.btnFind.Text = "Tìm kiếm";
             this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // tbTen
             // 
@@ -223,6 +225,7 @@
             this.tblBan.TabIndex = 20;
             this.tblBan.Text = "Bán";
             this.tblBan.UseVisualStyleBackColor = true;
+            this.tblBan.Click += new System.EventHandler(this.tblBan_Click);
             // 
             // QuanLyCayCanh
             // 
