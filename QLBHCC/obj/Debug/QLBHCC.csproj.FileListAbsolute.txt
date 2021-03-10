@@ -15,3 +15,4 @@ C:\Users\84164\Desktop\QLBHCC\QLBHCC\bin\Debug\BouncyCastle.Crypto.dll
 C:\Users\84164\Desktop\QLBHCC\QLBHCC\bin\Debug\itextsharp.dll
 C:\Users\84164\Desktop\QLBHCC\QLBHCC\bin\Debug\itextsharp.xml
 C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.csproj.CopyComplete
+C:\Users\84164\Desktop\QLBHCC\QLBHCC\obj\Debug\QLBHCC.frmHoaDon.resources

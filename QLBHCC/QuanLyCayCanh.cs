@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,7 +61,7 @@ namespace QLBHCC
             {
                 conn.Open();
                 SqlCommand comm = new SqlCommand();
-                comm.CommandText = "select idCayCanh as Id, sTenCayCanh as N'Tên cây',iLoaiCay as N'Loại cây', fGiaBan as N'Giá bán', fGiaNhap as N'Giá nhập', iSoLuong as N'Số lượng', sMoTa as N'Mô tả'  from tbl_caycanh";
+                comm.CommandText = "select idCayCanh as Id, sTenCayCanh as N'Tên cây',tbl_loaicay.idLoaiCay as N'Tên loại', fGiaBan as N'Giá bán', fGiaNhap as N'Giá nhập', iSoLuong as N'Số lượng', sMoTa as N'Mô tả', sAnh as 'Anh'  from tbl_caycanh, tbl_loaicay where tbl_caycanh.iLoaiCay = tbl_loaicay.idLoaiCay order by Id DESC ";
                 comm.CommandType = CommandType.Text;
                 comm.Connection = conn;
                 SqlDataAdapter da = new SqlDataAdapter(comm);
@@ -68,6 +69,7 @@ namespace QLBHCC
                 da.Fill(dt);
                 dataGridView1.AutoResizeColumns();
                 dataGridView1.DataSource = dt;
+                this.dataGridView1.Columns[7].Visible = false;
             }
         }
         private void label5_Click(object sender, EventArgs e)
@@ -140,6 +142,16 @@ namespace QLBHCC
                 {
                     using (SqlConnection conn = new SqlConnection(connString))
                     {
+                        string filename = System.IO.Path.GetFileName(openFileDialog1.FileName);
+                        string path = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
+                        if (!File.Exists(path + "\\image\\" + filename))
+                        {
+                            System.IO.File.Copy(openFileDialog1.FileName, path + "\\image\\" + filename);
+                        }
+                        if (filename == null)
+                        {
+                            MessageBox.Show("Please select a valid image.");
+                        }
                         conn.Open();
                         SqlCommand comm = new SqlCommand();
                         comm.CommandText = "SP_addCay";
@@ -151,6 +163,7 @@ namespace QLBHCC
                         comm.Parameters.AddWithValue("@fGiaNhap", tbGiaN.Text);
                         comm.Parameters.AddWithValue("@iSoLuong", tbSl.Text);
                         comm.Parameters.AddWithValue("@sMoTa", tbDesc.Text);
+                        comm.Parameters.AddWithValue("@sAnh", path + "\\image\\" + filename);
                         int ire = comm.ExecuteNonQuery();
                         if (ire >= 1)
                         {
@@ -192,22 +205,25 @@ namespace QLBHCC
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+            if (MessageBox.Show("Bạn có muốn xóa hay không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                conn.Open();
-                SqlCommand comm = new SqlCommand();
-                comm.CommandText = "delete from tbl_caycanh where idCayCanh = " + dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                comm.CommandType = CommandType.Text;
-                comm.Connection = conn;
-                int ire = comm.ExecuteNonQuery();
-                if (ire >= 1)
+                using (SqlConnection conn = new SqlConnection(connString))
                 {
-                    MessageBox.Show("Xóa thành công");
-                    load();
-                }
-                else
-                {
-                    MessageBox.Show("Xóa thất bại");
+                    conn.Open();
+                    SqlCommand comm = new SqlCommand();
+                    comm.CommandText = "delete from tbl_caycanh where idCayCanh = " + dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                    comm.CommandType = CommandType.Text;
+                    comm.Connection = conn;
+                    int ire = comm.ExecuteNonQuery();
+                    if (ire >= 1)
+                    {
+                        MessageBox.Show("Xóa thành công");
+                        load();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xóa thất bại");
+                    }
                 }
             }
         }
@@ -220,6 +236,16 @@ namespace QLBHCC
                 {
                     using (SqlConnection conn = new SqlConnection(connString))
                     {
+                        string filename = System.IO.Path.GetFileName(openFileDialog1.FileName);
+                        string path = Application.StartupPath.Substring(0, (Application.StartupPath.Length - 10));
+                        if (!File.Exists(path + "\\image\\" + filename))
+                        {
+                            System.IO.File.Copy(openFileDialog1.FileName, path + "\\image\\" + filename);
+                        }
+                        if (filename == null)
+                        {
+                            MessageBox.Show("Please select a valid image.");
+                        }
                         conn.Open();
                         SqlCommand comm = new SqlCommand();
                         comm.CommandText = "SP_fixCay";
@@ -231,6 +257,7 @@ namespace QLBHCC
                         comm.Parameters.AddWithValue("@fGiaNhap", tbGiaN.Text);
                         comm.Parameters.AddWithValue("@iSoLuong", tbSl.Text);
                         comm.Parameters.AddWithValue("@sMoTa", tbDesc.Text);
+                        comm.Parameters.AddWithValue("@anh", path + "\\image\\" + filename);
                         comm.Parameters.AddWithValue("@id", dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
                         int ire = comm.ExecuteNonQuery();
                         if (ire >= 1)
@@ -279,6 +306,15 @@ namespace QLBHCC
                 tbGiaN.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
                 tbSl.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
                 tbDesc.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+                if (dataGridView1.SelectedRows[0].Cells[7].Value.ToString() == "" || dataGridView1.SelectedRows[0].Cells[7].Value.ToString() == null)
+                {
+                    pictureBox1.Image = null;
+                }
+                else
+                {
+                    pictureBox1.Image = new Bitmap(dataGridView1.SelectedRows[0].Cells[7].Value.ToString());
+                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
         }
 
@@ -301,7 +337,7 @@ namespace QLBHCC
                     {
                         conn.Open();
                         SqlCommand comm = new SqlCommand();
-                        comm.CommandText = "select idCayCanh as Id, sTenCayCanh as N'Tên cây',iLoaiCay as N'Loại cây', fGiaBan as N'Giá bán', fGiaNhap as N'Giá nhập', iSoLuong as N'Số lượng', sMoTa as N'Mô tả'  from tbl_caycanh where sTenCayCanh like '%" + tbFind.Text + "%'";
+                        comm.CommandText = "select idCayCanh as Id, sTenCayCanh as N'Tên cây',tbl_loaicay.idLoaiCay as N'Tên loại', fGiaBan as N'Giá bán', fGiaNhap as N'Giá nhập', iSoLuong as N'Số lượng', sMoTa as N'Mô tả', sAnh as 'Anh'  from tbl_caycanh, tbl_loaicay where tbl_caycanh.iLoaiCay = tbl_loaicay.idLoaiCay and sTenCayCanh like '%" + tbFind.Text + "%'";
                         comm.CommandType = CommandType.Text;
                         comm.Connection = conn;
                         SqlDataAdapter da = new SqlDataAdapter(comm);
@@ -333,7 +369,7 @@ namespace QLBHCC
                 {
                     conn.Open();
                     SqlCommand comm = new SqlCommand();
-                    comm.CommandText = "select idCayCanh as Id, sTenCayCanh as N'Tên cây',iLoaiCay as N'Loại cây', fGiaBan as N'Giá bán', fGiaNhap as N'Giá nhập', iSoLuong as N'Số lượng', sMoTa as N'Mô tả'  from tbl_caycanh where sTenCayCanh like '%" + tbFind.Text + "%'";
+                    comm.CommandText = "select idCayCanh as Id, sTenCayCanh as N'Tên cây',tbl_loaicay.idLoaiCay as N'Tên loại', fGiaBan as N'Giá bán', fGiaNhap as N'Giá nhập', iSoLuong as N'Số lượng', sMoTa as N'Mô tả', sAnh as 'Anh'  from tbl_caycanh, tbl_loaicay where tbl_caycanh.iLoaiCay = tbl_loaicay.idLoaiCay and sTenCayCanh like '%" + tbFind.Text + "%'";
                     comm.CommandType = CommandType.Text;
                     comm.Connection = conn;
                     SqlDataAdapter da = new SqlDataAdapter(comm);
@@ -347,6 +383,31 @@ namespace QLBHCC
         private void tbFind_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.InitialDirectory = "C://Desktop";
+            openFileDialog1.Title = "Select image to be upload.";
+            openFileDialog1.Filter = "Image Only(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
+            openFileDialog1.FilterIndex = 1;
+            try
+            {
+                if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    string path = System.IO.Path.GetFullPath(openFileDialog1.FileName);
+                    pictureBox1.Image = new Bitmap(openFileDialog1.FileName);
+                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+                else
+                {
+                    MessageBox.Show("Please Upload image.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

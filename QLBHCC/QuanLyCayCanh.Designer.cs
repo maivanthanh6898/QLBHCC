@@ -47,7 +47,11 @@
             this.tbDesc = new System.Windows.Forms.RichTextBox();
             this.cbLoai = new System.Windows.Forms.ComboBox();
             this.tblBan = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -58,7 +62,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(34, 57);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(807, 173);
+            this.dataGridView1.Size = new System.Drawing.Size(571, 173);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridView1_RowStateChanged);
             // 
@@ -135,9 +139,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(31, 298);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 9;
-            this.label2.Text = "Loại cây: ";
+            this.label2.Text = "Tên loại: ";
             // 
             // label3
             // 
@@ -227,11 +231,37 @@
             this.tblBan.UseVisualStyleBackColor = true;
             this.tblBan.Click += new System.EventHandler(this.tblBan_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(634, 57);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(227, 138);
+            this.pictureBox1.TabIndex = 21;
+            this.pictureBox1.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(634, 199);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(227, 31);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Thêm";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.CheckFileExists = false;
+            this.openFileDialog1.CheckPathExists = false;
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // QuanLyCayCanh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 461);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tblBan);
             this.Controls.Add(this.cbLoai);
             this.Controls.Add(this.tbDesc);
@@ -257,6 +287,7 @@
             this.Text = "Quản lý cây cảnh";
             this.Load += new System.EventHandler(this.QuanLyCayCanh_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,5 +314,8 @@
         private System.Windows.Forms.RichTextBox tbDesc;
         private System.Windows.Forms.ComboBox cbLoai;
         private System.Windows.Forms.Button tblBan;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
