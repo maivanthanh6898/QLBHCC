@@ -46,12 +46,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tbDesc = new System.Windows.Forms.RichTextBox();
             this.cbLoai = new System.Windows.Forms.ComboBox();
-            this.tblBan = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.quaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quảnLýHóaĐơnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -221,16 +224,6 @@
             this.cbLoai.Size = new System.Drawing.Size(171, 21);
             this.cbLoai.TabIndex = 19;
             // 
-            // tblBan
-            // 
-            this.tblBan.Location = new System.Drawing.Point(678, 388);
-            this.tblBan.Name = "tblBan";
-            this.tblBan.Size = new System.Drawing.Size(163, 31);
-            this.tblBan.TabIndex = 20;
-            this.tblBan.Text = "Bán";
-            this.tblBan.UseVisualStyleBackColor = true;
-            this.tblBan.Click += new System.EventHandler(this.tblBan_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(634, 57);
@@ -255,6 +248,31 @@
             this.openFileDialog1.CheckPathExists = false;
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.quaToolStripMenuItem,
+            this.quảnLýHóaĐơnToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(884, 24);
+            this.menuStrip1.TabIndex = 23;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // quaToolStripMenuItem
+            // 
+            this.quaToolStripMenuItem.Name = "quaToolStripMenuItem";
+            this.quaToolStripMenuItem.Size = new System.Drawing.Size(110, 20);
+            this.quaToolStripMenuItem.Text = "Quản lý cây cảnh";
+            this.quaToolStripMenuItem.Click += new System.EventHandler(this.quaToolStripMenuItem_Click);
+            // 
+            // quảnLýHóaĐơnToolStripMenuItem
+            // 
+            this.quảnLýHóaĐơnToolStripMenuItem.Name = "quảnLýHóaĐơnToolStripMenuItem";
+            this.quảnLýHóaĐơnToolStripMenuItem.Size = new System.Drawing.Size(107, 20);
+            this.quảnLýHóaĐơnToolStripMenuItem.Text = "Quản lý hóa đơn";
+            this.quảnLýHóaĐơnToolStripMenuItem.Click += new System.EventHandler(this.quảnLýHóaĐơnToolStripMenuItem_Click);
+            // 
             // QuanLyCayCanh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -262,7 +280,6 @@
             this.ClientSize = new System.Drawing.Size(884, 461);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.tblBan);
             this.Controls.Add(this.cbLoai);
             this.Controls.Add(this.tbDesc);
             this.Controls.Add(this.label6);
@@ -281,6 +298,8 @@
             this.Controls.Add(this.btnAđ);
             this.Controls.Add(this.tbFind);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "QuanLyCayCanh";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -288,6 +307,8 @@
             this.Load += new System.EventHandler(this.QuanLyCayCanh_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,9 +334,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.RichTextBox tbDesc;
         private System.Windows.Forms.ComboBox cbLoai;
-        private System.Windows.Forms.Button tblBan;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem quaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quảnLýHóaĐơnToolStripMenuItem;
     }
 }

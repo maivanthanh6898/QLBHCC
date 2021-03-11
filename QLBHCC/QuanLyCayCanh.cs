@@ -17,11 +17,13 @@ namespace QLBHCC
     public partial class QuanLyCayCanh : Form
     {
         private string connString = ConfigurationManager.ConnectionStrings["connectionString"].ToString();
-        String id;
+        String id, name;
+        DataTable dttb = new DataTable();
         public QuanLyCayCanh(string username, string id)
         {
             InitializeComponent();
             this.id = id;
+            this.name = username;
         }
 
         private void QuanLyCayCanh_Load(object sender, EventArgs e)
@@ -351,9 +353,6 @@ namespace QLBHCC
 
         private void tblBan_Click(object sender, EventArgs e)
         {
-            QuanLyHoaDon qlhd = new QuanLyHoaDon(id);
-            this.Hide();
-            qlhd.Show();
 
         }
 
@@ -383,6 +382,18 @@ namespace QLBHCC
         private void tbFind_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void quaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void quảnLýHóaĐơnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmHoaDon qlhd = new frmHoaDon(id, name);
+            this.Hide();
+            qlhd.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
