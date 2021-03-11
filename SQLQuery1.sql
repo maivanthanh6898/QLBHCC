@@ -23,3 +23,10 @@ INSERT INTO [dbo].[tbl_chitiethoadon] ( [idHoaDon], [idCayCanh], [iSoluong], [fG
 END;
 
 SP_INSERTDETAILS 1,2,1,10,10
+
+
+select idKhachHang AS Id,sTenKh as N'Tên khách hàng',sDiaChi as N'Địa chỉ',sGioiTinh, sSDT as SĐT from tbl_khachhang
+
+insert into tbl_khachhang values('test','HN','Nam','12345678')
+
+update tbl_khachhang set sDiaChi = N'1',GioiTinh = N'1',sSDT = N'1',sTenKh = N'1' WHERE idKhachHang = 1

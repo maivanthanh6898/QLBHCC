@@ -391,9 +391,23 @@ namespace QLBHCC
 
         private void quảnLýHóaĐơnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmHoaDon qlhd = new frmHoaDon(id, name);
+            frmHoaDon qlhd = new frmHoaDon(id, name, "");
             this.Hide();
             qlhd.Show();
+        }
+
+        private void quảnLýKháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmKhachHang qlhd = new frmKhachHang(name, id);
+            this.Hide();
+            qlhd.Show();
+        }
+
+        private void thốngKêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmThongKe qlhd = new frmThongKe(name, id);
+            qlhd.Show();
+            this.Dispose();
         }
 
         private void button1_Click(object sender, EventArgs e)

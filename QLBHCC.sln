@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLBHCC", "QLBHCC\QLBHCC.csproj", "{AD0577C0-FCD1-4002-A244-3069E0A4D7D0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E8CF3FB4-B934-45AB-B2C2-356666D8CDA4}"
+	ProjectSection(SolutionItems) = preProject
+		SQLQuery1.sql = SQLQuery1.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
