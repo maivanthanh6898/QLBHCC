@@ -1,4 +1,6 @@
-﻿using System;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -6,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,6 +66,96 @@ namespace QLBHCC
             frmKhachHang hd = new frmKhachHang(name, id);
             hd.Show();
             this.Dispose();
+        }
+
+        private void frmThongKe_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.Rows.Count > 0)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "PDF (*.pdf)|*.pdf";
+                sfd.FileName = "thongke.pdf";
+                bool fileError = false;
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    if (File.Exists(sfd.FileName))
+                    {
+                        try
+                        {
+                            File.Delete(sfd.FileName);
+                        }
+                        catch (IOException ex)
+                        {
+                            fileError = true;
+                            MessageBox.Show("It wasn't possible to write the data to the disk." + ex.Message);
+                        }
+                    }
+                    if (!fileError)
+                    {
+                        PdfPTable pdfTable = new PdfPTable(dataGridView2.Columns.Count);
+                        pdfTable.DefaultCell.Padding = 3;
+                        pdfTable.WidthPercentage = 100;
+                        pdfTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+                        foreach (DataGridViewColumn column in dataGridView2.Columns)
+                        {
+                            PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText));
+                            pdfTable.AddCell(cell);
+                        }
+
+                        foreach (DataGridViewRow row in dataGridView2.Rows)
+                        {
+                            if (row.Index != dataGridView2.Rows.Count - 1)
+                            {
+                                foreach (DataGridViewCell cell in row.Cells)
+                                {
+                                    pdfTable.AddCell(cell.Value.ToString());
+                                }
+                            }
+                        }
+                        iTextSharp.text.Font titleFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN
+                                                 , 15
+                                                 , iTextSharp.text.Font.BOLDITALIC
+                                                 , BaseColor.BLACK
+                           );
+                        Chunk titleChunk = new Chunk("                                                 THONG KE HOA DON\n\n", titleFont);
+
+                        iTextSharp.text.Font space = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA
+                                            , 14
+                                            , iTextSharp.text.Font.NORMAL
+                                            , BaseColor.BLACK
+                            );
+                        Chunk space1 = new Chunk("\n\n\n", space);
+                        using (FileStream stream = new FileStream(sfd.FileName, FileMode.Create))
+                        {
+                            Document pdfDoc = new Document(PageSize.A4, 30f, 20f, 20f, 10f);
+                            PdfWriter.GetInstance(pdfDoc, stream);
+                            pdfDoc.Open();
+                            iTextSharp.text.Paragraph paragraph = new iTextSharp.text.Paragraph();
+                            pdfDoc.Add(titleChunk);
+                            pdfDoc.Add(paragraph);
+                            pdfDoc.Add(space1);
+                            pdfDoc.Add(paragraph);
+                            pdfDoc.Add(paragraph);
+                            pdfDoc.Add(pdfTable);
+                            pdfDoc.Add(paragraph);
+                            pdfDoc.Close();
+                            stream.Close();
+                        }
+
+                        MessageBox.Show("Xuất file thành công !!!", "Info");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Thông tin rỗng !!!", "Info");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

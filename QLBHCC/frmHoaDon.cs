@@ -82,6 +82,7 @@ namespace QLBHCC
             tbTk.Text = "Nhập mã HĐ...";
             tbTk.ForeColor = Color.Gray;
             AutoCompleteStringCollection acsc = new AutoCompleteStringCollection();
+            AutoCompleteStringCollection acsc1 = new AutoCompleteStringCollection();
             tbMaNV.Text = id;
             tbTenNV.Text = name;
             using (SqlConnection conn = new SqlConnection(connString))
@@ -97,32 +98,17 @@ namespace QLBHCC
                     while (dr.Read())
                     {
                         acsc.Add(dr["idCayCanh"].ToString());
+                        acsc1.Add(dr["sTenCayCanh"].ToString());
                     }
                 }
                 tbMaCay.AutoCompleteCustomSource = acsc;
+                tbTenCay.AutoCompleteCustomSource = acsc1;
             }
         }
 
         private void dataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
         {
 
-            //if (dataGridView1.SelectedRows.Count != 0 && dataGridView1.SelectedRows[0].Index != dataGridView1.Rows.Count - 1)
-            //{
-            //    tbTen.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-            //    tbGiaB.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
-            //    tbGiaN.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
-            //    tbSl.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
-            //    tbDesc.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
-            //    if (dataGridView1.SelectedRows[0].Cells[7].Value.ToString() == "" || dataGridView1.SelectedRows[0].Cells[7].Value.ToString() == null)
-            //    {
-            //        pictureBox1.Image = null;
-            //    }
-            //    else
-            //    {
-            //        pictureBox1.Image = new Bitmap(dataGridView1.SelectedRows[0].Cells[7].Value.ToString());
-            //        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            //    }
-            //}
         }
 
         private void tbSDT_KeyPress(object sender, KeyPressEventArgs e)
@@ -242,6 +228,26 @@ namespace QLBHCC
             {
                 conn.Open();
                 SqlCommand comm = new SqlCommand();
+                comm.CommandText = "select * from tbl_hoadon where idHoaDon = " + tbMaHD.Text;
+                comm.CommandType = CommandType.Text;
+                comm.Connection = conn;
+                SqlDataReader reader = comm.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        if (reader["isPrint"].ToString() != "False")
+                        {
+                            MessageBox.Show("Hóa đơn đã được in");
+                            return;
+                        }
+                    }
+                }
+            }
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand();
                 comm.CommandText = "delete from tbl_chitiethoadon where idHoaDon=" + tbMaHD.Text;
                 comm.CommandType = CommandType.Text;
                 comm.Connection = conn;
@@ -353,7 +359,20 @@ namespace QLBHCC
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            using (SqlConnection conn1 = new SqlConnection(connString))
+            {
+                conn1.Open();
+                SqlCommand comm1 = new SqlCommand();
+                comm1.CommandText = "update tbl_hoadon set isPrint = 'TRUE' where idHoaDon = " + tbMaHD.Text;
+                comm1.CommandType = CommandType.Text;
+                comm1.Connection = conn1;
+                int ire = comm1.ExecuteNonQuery();
+                if (ire < 1)
+                {
+                    MessageBox.Show("Lỗi hệ thống");
+                    return;
+                }
+            }
             String ma = "";
             String kh = "";
             String nv = "";
@@ -534,6 +553,40 @@ namespace QLBHCC
             frmThongKe qlhd = new frmThongKe(name, id);
             qlhd.Show();
             this.Dispose();
+        }
+
+        private void tbTenCay_TextChanged(object sender, EventArgs e)
+        {
+            if (tbTenCay.Text == null || tbTenCay.Text == "")
+            {
+                tbMaCay.Text = "";
+                tbSoLuong.Text = "";
+                tbDonGia.Text = "";
+                return;
+            }
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                SqlCommand comm = new SqlCommand();
+                comm.CommandText = "select * from tbl_caycanh where sTenCayCanh = N'" + tbTenCay.Text + "'";
+                comm.CommandType = CommandType.Text;
+                comm.Connection = conn;
+                SqlDataReader dr = comm.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        tbMaCay.Text = dr["idCayCanh"].ToString();
+                        tbDonGia.Text = dr["fGiaBan"].ToString();
+                    }
+                }
+            }
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            dttb.Rows[e.RowIndex][4] = float.Parse(dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString()) * float.Parse(dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+            dataGridView1.DataSource = dttb;
         }
 
         private void tbSDT_TextChanged(object sender, EventArgs e)

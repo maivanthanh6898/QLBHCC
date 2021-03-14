@@ -64,9 +64,9 @@
             this.quảnLýCâyCảnhToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýHóaĐơnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thốngKêToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.thốngKêToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -254,11 +254,13 @@
             // 
             // tbTenCay
             // 
-            this.tbTenCay.Enabled = false;
+            this.tbTenCay.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tbTenCay.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.tbTenCay.Location = new System.Drawing.Point(520, 17);
             this.tbTenCay.Name = "tbTenCay";
             this.tbTenCay.Size = new System.Drawing.Size(189, 20);
             this.tbTenCay.TabIndex = 10;
+            this.tbTenCay.TextChanged += new System.EventHandler(this.tbTenCay_TextChanged);
             // 
             // tbSoLuong
             // 
@@ -322,6 +324,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(779, 150);
             this.dataGridView1.TabIndex = 15;
+            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridView1_RowStateChanged);
             // 
             // btnAdd
@@ -418,6 +421,13 @@
             this.quảnLýKháchHàngToolStripMenuItem.Text = "Quản lý khách hàng";
             this.quảnLýKháchHàngToolStripMenuItem.Click += new System.EventHandler(this.quảnLýKháchHàngToolStripMenuItem_Click);
             // 
+            // thốngKêToolStripMenuItem
+            // 
+            this.thốngKêToolStripMenuItem.Name = "thốngKêToolStripMenuItem";
+            this.thốngKêToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.thốngKêToolStripMenuItem.Text = "Thống kê";
+            this.thốngKêToolStripMenuItem.Click += new System.EventHandler(this.thốngKêToolStripMenuItem_Click);
+            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(574, 467);
@@ -437,13 +447,6 @@
             this.button5.Text = "Thống Kê";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // thốngKêToolStripMenuItem
-            // 
-            this.thốngKêToolStripMenuItem.Name = "thốngKêToolStripMenuItem";
-            this.thốngKêToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.thốngKêToolStripMenuItem.Text = "Thống kê";
-            this.thốngKêToolStripMenuItem.Click += new System.EventHandler(this.thốngKêToolStripMenuItem_Click);
             // 
             // frmHoaDon
             // 
